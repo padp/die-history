@@ -1,0 +1,29 @@
+# Credentials - never commit
+secret/
+.env
+
+# Generated data - rebuilt locally by tools/*.py, not source
+data/*.db
+data/*.db-journal
+data/*.db-wal
+data/*.db-shm
+data/*.csv
+data/logs/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+env/
+*.egg-info/
+
+# Editor/OS cruft
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Claude Code session state, not project source
+.claude/

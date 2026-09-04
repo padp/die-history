@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Die History</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="topbar">
+    <div class="brand">
+      <div class="mark">DH</div>
+      <div>
+        <h1>Die History</h1>
+        <p class="totals" id="totals">loading…</p>
+      </div>
+    </div>
+    <div class="searchwrap">
+      <input id="search" type="search" placeholder="Search die number or description…">
+    </div>
+    <div class="scope">
+      <button class="scopebtn on" data-scope="paducah">Paducah Only</button>
+      <button class="scopebtn" data-scope="all">View All</button>
+    </div>
+  </div>
+
+  <div class="layout">
+    <div class="list" id="die-list"><p class="dim pad">loading…</p></div>
+    <div class="detail" id="die-detail">
+      <p class="dim pad">Select a die on the left to see its production and nitride history.</p>
+    </div>
+  </div>
+
+<script src="app.js"></script>
+</body>
+</html>
