@@ -12,7 +12,16 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY cloud/ .
 
+# api/app.py does `from db import get_db` (a plain top-level import, same
+# as running `python app.py` locally from inside api/ - see that file's
+# own __main__ comment) - it only resolves if the process's working
+# directory is api/ itself, since that's what puts db.py on sys.path.
+# Running gunicorn as "api.app:app" from /app does NOT do that (db.py
+# sits one level down, invisible to the api.app submodule's plain
+# `import db`) - confirmed live, ModuleNotFoundError: No module named 'db'.
+WORKDIR /app/api
+
 # Render sets $PORT at runtime; the shell form of CMD is required for the
 # $PORT expansion to actually happen (the exec form would pass the literal
 # string "$PORT" to gunicorn instead of substituting it).
-CMD gunicorn api.app:app --bind 0.0.0.0:$PORT
+CMD gunicorn app:app --bind 0.0.0.0:$PORT
