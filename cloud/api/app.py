@@ -78,6 +78,10 @@ def die_detail(die_no):
 
 
 if __name__ == "__main__":
-    # Local smoke-test only - Render/Vercel invoke `app` directly (gunicorn /
-    # the Vercel Python runtime), never this __main__ block.
-    app.run(port=5059, debug=True)
+    # Local smoke-test only - Render/Vercel are expected to invoke `app`
+    # directly (gunicorn / the Vercel Python runtime), never this block. But
+    # if a Render service ends up configured with a start command of
+    # `python api/app.py` instead of gunicorn, PORT (Render sets this, not a
+    # fixed value) still has to be honored or Render's proxy gets a 502
+    # against whatever port it's actually listening for.
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5059)), debug=True)
